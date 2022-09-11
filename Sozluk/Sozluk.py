@@ -14,4 +14,5 @@ for kelime in kelimeler:
         else:
             continue
 
+#github test
 
