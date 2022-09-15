@@ -9,23 +9,26 @@ with open('C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python39_64\gts
 
 # harfler listesindeki her bir harfin sayısını hesaplıyorum
 harfler_harf_sayisi = {}
-
 for i in harfler:
     harfler_harf_sayisi[i] = harfler.count(i)
-    
-print(harfler_harf_sayisi)
+# tamamen saglama amacli yazdiriyorum    
+#print(harfler_harf_sayisi)
 
 #json dosyasındaki her bir kelimeyi kelimeler listesine ekliyorum. json dosyasindaki (yani sozlukteki) madde key'ine karsilik gelen her value bizim icin kelimedir.
 kelimeler = []
+
 for i in range(len(data)):
-    if data[i]['madde']:
-
+    
         kelimeler.append(data[i]['madde'])
+#kelimeler listesindeki duplicate kayitlari ucuruyoruz
+kelimeler = list( dict.fromkeys(kelimeler) )
+        
 
+#harflerdeki her harf ayni zamanda kelimede mevcut mu kontrolü burada yapiyoruz
 for kelime in kelimeler:
         hepsi_var = all([harf in harfler for harf in kelime])
         if hepsi_var == True:
-            
+         
             #her bir kelimedeki harf sayisini hesapliyorum
             kelime_harf_sayisi = {}
             for i in kelime:
@@ -35,11 +38,12 @@ for kelime in kelimeler:
             
             #bir kelimenin gecerli olabilmesi icin harfler listesindeki spesifik bir harfin toplam bulunma sayisi kelimeler listesindeki aynı harfin sayisindan kucuk veya esit olmali
             if kelime.count(i) <= harfler.count(i):  
-                
+    
                 print(kelime)
+                   
+                
         else:
             continue
-
 
 
 
