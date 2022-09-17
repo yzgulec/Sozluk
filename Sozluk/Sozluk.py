@@ -28,13 +28,22 @@ for kelime in kelimeler:
         #her bir kelimedeki harf sayisini hesapliyorum
         kelime_harf_sayisi = {}
         for i in kelime:
-                kelime_harf_sayisi[i] = kelime.count(i)
-         
-        #bir kelimenin gecerli olabilmesi icin harfler listesindeki spesifik bir harfin toplam bulunma sayisi kelimeler listesindeki aynı harfin sayisindan kucuk veya esit olmali
-        if hepsi_var == True and kelime.count(i) <= harfler.count(i):  
+                kelime_harf_sayisi[i] = kelime.count(i)     
+        
+        if hepsi_var == True:  
     
-                print(kelime)
-                   
+                #bu nokta çok kritik. burada kelimenin gecerli olabilmesi icin harflerdeki harf sayisinin kelimedeki harf sayisindan olması gerektigini soyluyoruz
+                gecerli_kelime = all(harfler_harf_sayisi[k] >= kelime_harf_sayisi[k] for k in kelime_harf_sayisi) and (len(kelime_harf_sayisi) > 1)
                 
+                ''' kelimedeki harf sayısının harflerdeki harf sayısına eşit veya kücük mü doğrulamasını burada yapabiliriz
+                print(gecerli_kelime)
+                print(kelime)
+                '''
+                if gecerli_kelime == True:
+                    print(kelime)
+
         else:
             continue
+
+
+
