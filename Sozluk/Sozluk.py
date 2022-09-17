@@ -30,9 +30,10 @@ for kelime in kelimeler:
         for i in kelime:
                 kelime_harf_sayisi[i] = kelime.count(i)     
         
+        #harfler listesindeki her harf kelimede de varsa...
         if hepsi_var == True:  
     
-                #bu nokta çok kritik. burada kelimenin gecerli olabilmesi icin harflerdeki harf sayisinin kelimedeki harf sayisindan olması gerektigini soyluyoruz
+                #bu nokta çok kritik. burada kelimenin gecerli olabilmesi icin harflerdeki harf sayisinin kelimedeki harf sayisindan olması gerektigini soyluyoruz. ayrica kelime tek harften oluşuyorsa onu göz ardı ediyoruz.
                 gecerli_kelime = all(harfler_harf_sayisi[k] >= kelime_harf_sayisi[k] for k in kelime_harf_sayisi) and (len(kelime_harf_sayisi) > 1)
                 
                 ''' kelimedeki harf sayısının harflerdeki harf sayısına eşit veya kücük mü doğrulamasını burada yapabiliriz
