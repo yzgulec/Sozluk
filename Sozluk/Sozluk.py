@@ -1,7 +1,6 @@
 ﻿def harfgiris():
 
     harfler = (input("Harfleri girin?" + ' ')).lower()
-    harfler = harfler.lower()
     print(list (harfler))
     return harfler
 
