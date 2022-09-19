@@ -1,6 +1,7 @@
 ﻿def harfgiris():
 
-    harfler = input("Harfleri girin?" + ' ')
+    harfler = (input("Harfleri girin?" + ' ')).lower()
+    harfler = harfler.lower()
     print(list (harfler))
     return harfler
 
@@ -50,8 +51,6 @@ def sonuc():
                         
                         #olası tüm kelimeleri bir değişkene atıyoruz
                         kelimelistesi=kelimelistesi + "\n" + kelime
-                       
-                    
                        
         else:
             continue
