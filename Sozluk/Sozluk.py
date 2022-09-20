@@ -22,6 +22,9 @@ def sonuc():
     for i in range(len(data)):
         kelimeler.append(data[i]['madde'])
 
+    #kelimeler'i alfabetik sıraya göre sıralıyoruz
+    kelimeler=sorted(kelimeler)
+
     #kelimeler listesindeki duplicate kayitlari ucuruyoruz
     kelimeler = list(dict.fromkeys(kelimeler))
     
@@ -50,6 +53,7 @@ def sonuc():
                         
                         #olası tüm kelimeleri bir değişkene atıyoruz
                         kelimelistesi=kelimelistesi + "\n" + kelime
+                        
                        
         else:
             continue
