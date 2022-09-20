@@ -22,13 +22,15 @@ def sonuc():
     for i in range(len(data)):
         kelimeler.append(data[i]['madde'])
 
-    #kelimeler'i alfabetik sıraya göre sıralıyoruz
-    kelimeler=sorted(kelimeler)
+    #kelimeler'i alfabetik sıraya göre ve her bir kelimenin sahip olduğu karakter sayısına sıralıyoruz
+    
+    kelimeler=sorted(kelimeler,key=len)
 
     #kelimeler listesindeki duplicate kayitlari ucuruyoruz
     kelimeler = list(dict.fromkeys(kelimeler))
     
     kelimelistesi=""
+    kelimelistesi_harfsayili=""
     #harflerdeki her harf ayni zamanda kelimede mevcut mu kontrolü burada yapiyoruz
     for kelime in kelimeler:
         
@@ -46,6 +48,7 @@ def sonuc():
                 gecerli_kelime_sarti = all(harfler_harf_sayisi[k] >= kelime_harf_sayisi[k] for k in kelime_harf_sayisi) and (len(kelime_harf_sayisi) > 1)
                 
                 
+
                 if gecerli_kelime_sarti == True:
                         
                         #konsola yazdırırken bunu da kullanabilirdik
@@ -54,11 +57,20 @@ def sonuc():
                         #olası tüm kelimeleri bir değişkene atıyoruz
                         kelimelistesi=kelimelistesi + "\n" + kelime
                         
+                        kelimelistesi_harfsayili=kelimelistesi_harfsayili + (str(len(kelime)) + ' ' + 'harfli kelime:' + kelime + "\n")
+                      
+                        
+
+
+
                        
         else:
             continue
 
     #olası tüm kelimeleri yazdırıyoruz
-    print(kelimelistesi)
+    print(kelimelistesi_harfsayili)
+
+    
+    
     
 sonuc()
