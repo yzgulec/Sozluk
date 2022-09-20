@@ -24,7 +24,7 @@ def sonuc():
 
     #kelimeler'i alfabetik sıraya göre ve her bir kelimenin sahip olduğu karakter sayısına sıralıyoruz
     
-    kelimeler=sorted(kelimeler,key=len)
+    kelimeler=sorted(sorted(kelimeler),key=len)
 
     #kelimeler listesindeki duplicate kayitlari ucuruyoruz
     kelimeler = list(dict.fromkeys(kelimeler))
@@ -57,7 +57,7 @@ def sonuc():
                         #olası tüm kelimeleri bir değişkene atıyoruz
                         kelimelistesi=kelimelistesi + "\n" + kelime
                         
-                        kelimelistesi_harfsayili=kelimelistesi_harfsayili + (str(len(kelime)) + ' ' + 'harfli kelime:' + kelime + "\n")
+                        kelimelistesi_harfsayili=kelimelistesi_harfsayili + (str(len(kelime)) + ' ' + 'harfli: ' + kelime + "\n")
                       
                         
 
@@ -70,7 +70,9 @@ def sonuc():
     #olası tüm kelimeleri yazdırıyoruz
     print(kelimelistesi_harfsayili)
 
-    
-    
+    with_s = [x for x in kelimelistesi if x.startswith('s')]
+    if with_s == True:
+        print(kelimelistesi)
+        print("The list with prefix s : " + str(with_s))
     
 sonuc()
