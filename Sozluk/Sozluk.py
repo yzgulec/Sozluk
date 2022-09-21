@@ -31,7 +31,6 @@ def sonuc():
     #kelimeler listesindeki duplicate kayitlari ucuruyoruz
     kelimeler = list(dict.fromkeys(kelimeler))
     
-    kelimelistesi=""
     kelimelistesi_harfsayili=""
     global kelimelistesi_array
     kelimelistesi_array=[]
@@ -75,8 +74,7 @@ def sonuc():
     ilebaslayan_kelime_harfsayili=""
     ilebaslayan_kelimeler = [x for x in kelimelistesi_array if x.startswith(ilebaslayan_harfler)]
     
-
-    if (ilebaslayan_harfler):
+    if (ilebaslayan_harfler) and (not ilebiten_harfler):
         print("ile baslayan kelimeler : " + str(ilebaslayan_kelimeler))
         for ilebaslayan_kelime in ilebaslayan_kelimeler:
 
@@ -84,17 +82,27 @@ def sonuc():
  
     print(ilebaslayan_kelime_harfsayili)
 
-    
     #belli bir harf ile biten kelimeler icin filtre
     ilebiten_kelime_harfsayili=""
     ilebiten_kelimeler = [x for x in kelimelistesi_array if x.endswith(ilebiten_harfler)]
 
-    if (ilebiten_harfler):
+    if (ilebiten_harfler) and (not ilebaslayan_harfler):
         print("ile biten kelimeler : " + str(ilebiten_kelimeler))
         for ilebiten_kelime in ilebiten_kelimeler:
         
             ilebiten_kelime_harfsayili=ilebiten_kelime_harfsayili + (str(len(ilebiten_kelime)) + ' ' + 'harfli: ' + ilebiten_kelime + "\n")
 
     print(ilebiten_kelime_harfsayili)
+
+    #belli bir harf ile başlayıp belli bir harf ile biten kelimeler icin filtre
+    ilebaslayip_ilebiten_kelime_harfsayili=""
+    if (ilebaslayan_harfler) and (ilebiten_harfler):
+
+        #iki listedeki ortak kelimeleri bir değişkene atıyorum
+        ilebaslayip_ilebiten_kelimeler = set(ilebaslayan_kelimeler) & set(ilebiten_kelimeler)
+        for ilebaslayip_ilebiten_kelime in ilebaslayip_ilebiten_kelimeler:
+            
+            ilebaslayip_ilebiten_kelime_harfsayili=ilebaslayip_ilebiten_kelime_harfsayili + (str(len(ilebaslayip_ilebiten_kelime)) + ' ' + 'harfli: ' + ilebaslayip_ilebiten_kelime + "\n")
+    print(ilebaslayip_ilebiten_kelime_harfsayili)
     
 sonuc()
