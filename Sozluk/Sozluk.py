@@ -1,6 +1,9 @@
 ﻿def harfgiris():
 
     harfler = (input("Harfleri girin?" + ' ')).lower()
+    global ilebaslayan_harfler, ilebiten_harfler
+    ilebaslayan_harfler=str(input("Hangi harf ile başlasın?"))
+    ilebiten_harfler=str(input("Hangi harf ile bitsin?"))
     print(list (harfler))
     return harfler
 
@@ -22,8 +25,7 @@ def sonuc():
     for i in range(len(data)):
         kelimeler.append(data[i]['madde'])
 
-    #kelimeler'i alfabetik sıraya göre ve her bir kelimenin sahip olduğu karakter sayısına sıralıyoruz
-    
+    #kelimeler'i alfabetik sıraya göre ve her bir kelimenin sahip olduğu karakter sayısına sıralıyoruz  
     kelimeler=sorted(sorted(kelimeler),key=len)
 
     #kelimeler listesindeki duplicate kayitlari ucuruyoruz
@@ -31,6 +33,9 @@ def sonuc():
     
     kelimelistesi=""
     kelimelistesi_harfsayili=""
+    global kelimelistesi_array
+    kelimelistesi_array=[]
+
     #harflerdeki her harf ayni zamanda kelimede mevcut mu kontrolü burada yapiyoruz
     for kelime in kelimeler:
         
@@ -46,8 +51,6 @@ def sonuc():
     
                 #bu nokta çok kritik. burada kelimenin gecerli olabilmesi icin harflerdeki harf sayisinin kelimedeki harf sayisindan olması gerektigini soyluyoruz. ayrica kelime tek harften oluşuyorsa onu göz ardı ediyoruz.
                 gecerli_kelime_sarti = all(harfler_harf_sayisi[k] >= kelime_harf_sayisi[k] for k in kelime_harf_sayisi) and (len(kelime_harf_sayisi) > 1)
-                
-                
 
                 if gecerli_kelime_sarti == True:
                         
@@ -55,24 +58,43 @@ def sonuc():
                         #print(kelime)
                         
                         #olası tüm kelimeleri bir değişkene atıyoruz
-                        kelimelistesi=kelimelistesi + "\n" + kelime
                         
-                        kelimelistesi_harfsayili=kelimelistesi_harfsayili + (str(len(kelime)) + ' ' + 'harfli: ' + kelime + "\n")
-                      
-                        
-
-
-
-                       
+                            kelimelistesi_harfsayili=kelimelistesi_harfsayili + (str(len(kelime)) + ' ' + 'harfli: ' + kelime + "\n")
+                            
+                            #burada tüm geçerli kelimeleri bir array listesinde topluyorum
+                            kelimelistesi_array.append(kelime)
+                            
         else:
             continue
 
     #olası tüm kelimeleri yazdırıyoruz
     print(kelimelistesi_harfsayili)
+    #print(kelimelistesi_array)
 
-    with_s = [x for x in kelimelistesi if x.startswith('s')]
-    if with_s == True:
-        print(kelimelistesi)
-        print("The list with prefix s : " + str(with_s))
+    #belli bir harf ile başlayan veya kelimeler icin filtre
+    ilebaslayan_kelime_harfsayili=""
+    ilebaslayan_kelimeler = [x for x in kelimelistesi_array if x.startswith(ilebaslayan_harfler)]
+    
+
+    if (ilebaslayan_harfler):
+        print("ile baslayan kelimeler : " + str(ilebaslayan_kelimeler))
+        for ilebaslayan_kelime in ilebaslayan_kelimeler:
+
+            ilebaslayan_kelime_harfsayili=ilebaslayan_kelime_harfsayili + (str(len(ilebaslayan_kelime)) + ' ' + 'harfli: ' + ilebaslayan_kelime + "\n")
+ 
+    print(ilebaslayan_kelime_harfsayili)
+
+    
+    #belli bir harf ile biten kelimeler icin filtre
+    ilebiten_kelime_harfsayili=""
+    ilebiten_kelimeler = [x for x in kelimelistesi_array if x.endswith(ilebiten_harfler)]
+
+    if (ilebiten_harfler):
+        print("ile biten kelimeler : " + str(ilebiten_kelimeler))
+        for ilebiten_kelime in ilebiten_kelimeler:
+        
+            ilebiten_kelime_harfsayili=ilebiten_kelime_harfsayili + (str(len(ilebiten_kelime)) + ' ' + 'harfli: ' + ilebiten_kelime + "\n")
+
+    print(ilebiten_kelime_harfsayili)
     
 sonuc()
